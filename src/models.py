@@ -9,7 +9,7 @@ from eralchemy2 import render_er
 Base = declarative_base()
 
 class Usuario(Base):
-    __tablename__ = 'Usuario'
+    __tablename__ = 'usuario'
     # Here we define columns for the table person
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
@@ -20,22 +20,24 @@ class Usuario(Base):
     
 
 class Personajes(Base):
-    __tablename__ = 'Personajes'
+    __tablename__ = 'personajes'
     id = Column(Integer, primary_key=True)
     nombre_personaje = Column(String(250), nullable=False)
     especie_personaje = Column(String(250), nullable=False)
     
     
 class Planetas(Base):
-    __tablename__ = 'Planetas'
+    __tablename__ = 'planetas'
     id = Column(Integer, primary_key=True)
     nombre_planeta = Column(String(250), nullable=False)
     habitabilidad = Column(String(250), nullable=False)
     habitantes = Column(String(250), nullable=False)
+    usuario_id = Column(Integer, ForeignKey("usuario.id"))
+    usuario = relationship(Usuario)
 
 
 class PersonajesFavoritos(Base):
-    __tablename__ = 'Personajes_Favoritos'
+    __tablename__ = 'personajes_favoritos'
     id = Column(Integer, primary_key=True)
     usuario_id = Column(Integer, ForeignKey ("usuario.id"))
     personaje_id = Column(Integer, ForeignKey ("personajes.id"))
@@ -44,7 +46,7 @@ class PersonajesFavoritos(Base):
 
 
 class PlanetasFavoritos(Base):
-    __tablename__ = 'Planetas_Favoritos'
+    __tablename__ = 'planetas_favoritos'
     id = Column(Integer, primary_key=True)
     usuario_id = Column(Integer, ForeignKey ("usuario.id"))
     planeta_id = Column(Integer, ForeignKey ("planetas.id"))
