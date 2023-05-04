@@ -32,7 +32,7 @@ class Planetas(Base):
     nombre_planeta = Column(String(250), nullable=False)
     habitabilidad = Column(String(250), nullable=False)
     habitantes = Column(String(250), nullable=False)
-    usuario_id = Column(Integer, ForeignKey("usuario.id"))
+    
     
 
 
